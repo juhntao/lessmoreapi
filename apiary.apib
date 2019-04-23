@@ -20,13 +20,12 @@ HOST: http://api.olabala.com/
     > 例如: `CN`, `US`
 
 2. 币别请参照 [Currency code](https://en.wikipedia.org/wiki/ISO_4217)
-    > 目前系统支持的币别是
+    > 目前系统支持的币别: 
     > `USD`, `CNY`, `EUR`, `GBP`, `CAD`, `JPY`, `KRW`, `AUD`, `HKD`, `MYR`, `TWD`
 
 3. 时间格式 `yyyy-MM-ddTHH:mm:ss`
-    > 例如: `2019-04-22T08:07:11` 默认时区是UTC
-
-    > 如果要指定时区 比如中国(UTC+8): `2019-04-22T08:07:11+08:00`
+    > 例如: `2019-04-22T08:07:11` 默认时区是UTC  
+    > 如果要指定时区 比如中国(UTC+8): `2019-04-22T08:07:11+08:00`  
 
 4. 重量
     > 支持的重量单位: `G`, `KG`, `LB`, `OZ`
@@ -34,8 +33,125 @@ HOST: http://api.olabala.com/
 5. 长度
     > 支持的长度单位: `CM`, `IN`, `MM`
 
-6. 测试账号
+6. 机场编码
+    > 三字码, 例如: `SHZ`, `HKG`, `SHA`, `JFK`, `LAX`
+
+7. 测试账号
     > username=demo, password=Pass123$
+
+## 请求实体
+
+### 包裹
+
+---
+
+| 字段 | 是否必填 | 描述 |
+| ------------- |:-------------:| -----:|
+| `serviceCode` | **必填** | 服务代码, 例如: `CN-US-Express` |
+| `parcels` | **必填** | 包裹 |
+| `parcels.orderNbr` | **必填** | 订单号, 例如: `87352121663001` |
+| `parcels.consignee` | **必填** | 收件人信息 |
+| `parcels.consignee.name` | **必填** | 收件人姓名，姓与名之间必须空格, 例如: `James Charles` |
+| `parcels.consignee.phone` |  | 收件人手机号, 例如: `123-456-7890` |
+| `parcels.consignee.email` |  | 收件人邮箱, 例如: `somebody@olabala.com` |
+| `parcels.consignee.company` |  | 收件人公司, 例如: `Less'More Ltd` |
+| `parcels.consignee.street1` | **必填** | 收件人详细地址1, 例如: `12345 Business Oneway` |
+| `parcels.consignee.street2` |  | 收件人详细地址2 |
+| `parcels.consignee.street3` |  | 收件人详细地址3 |
+| `parcels.consignee.district` |  | 收件人区 |
+| `parcels.consignee.city` | **必填** | 收件人城市, 例如: `City Of Industry` |
+| `parcels.consignee.province` | **必填** | 收件人省份，州, 例如: `CA` |
+| `parcels.consignee.postalCode` | **必填** | 收件人邮编, 例如: `91789` |
+| `parcels.consignee.countryCode` | **必填** | 收件人国家代码, 例如: `US` |
+| `parcels.shipper` | **必填** | 寄件人信息 |
+| `parcels.shipper.name` | **必填** | 寄件人姓名，姓与名之间必须空格, 例如: `Zhang san` |
+| `parcels.shipper.phone` |  | 寄件人手机号, 例如: `13812344321` |
+| `parcels.shipper.email` |  | 寄件人邮箱 |
+| `parcels.shipper.company` |  | 寄件人公司 |
+| `parcels.shipper.street1` | **必填** | 寄件人详细地址1, 例如: `RM 101, No. 123 Pingxing Rd` |
+| `parcels.shipper.street2` |  | 寄件人详细地址2 |
+| `parcels.shipper.street3` |  | 寄件人详细地址3 |
+| `parcels.shipper.district` |  | 寄件人区 |
+| `parcels.shipper.city` | **必填** | 寄件人城市, 例如: `Shanghai` |
+| `parcels.shipper.province` | **必填** | 寄件人省份，州, 例如: `Shanghai` |
+| `parcels.shipper.postalCode` | **必填** | 寄件人邮编, 例如: `200040` |
+| `parcels.shipper.countryCode` | **必填** | 寄件人国家代码, 例如: `CN` |
+| `parcels.lineInfos` | **必填** | 申报信息 |
+| `parcels.lineInfos.goodsInfo` | **必填** | 商品信息 |
+| `parcels.lineInfos.goodsInfo.sku` |  | 商品SKU, 例如: `132453301` |
+| `parcels.lineInfos.goodsInfo.spec` |  | 商品规格, 例如: `13Inch, TouchBar` |
+| `parcels.lineInfos.goodsInfo.name` | **必填** | 商品名称, 例如: `Macbook Pro` |
+| `parcels.lineInfos.goodsInfo.brand` |  | 商品品牌, 例如: `Apple` |
+| `parcels.lineInfos.goodsInfo.model` |  | 商品型号, 例如: `MR942CH/A` |
+| `parcels.lineInfos.goodsInfo.hsCode` |  | HS Code, 例如: `165390` |
+| `parcels.lineInfos.lineTotal` | **必填** | 价值 |
+| `parcels.lineInfos.lineTotal.value` | **必填** | 包裹价值, 值在: `0.11 ~ 800.00 USD` |
+| `parcels.lineInfos.lineTotal.unit` | **必填** | 包裹价值单位, 例如: `USD` |
+| `parcels.lineInfos.quantity` | **必填** | 包裹中物品总数, 值在: `1 ~ 255` |
+| `parcels.weight` | **必填** | 重量 |
+| `parcels.weight.unit` | **必填** | 重量单位, 例如: `G` |
+| `parcels.weight.value` | **必填** | 重量值 `< 70 LB` |
+| `parcels.dimension` |  | 三维 |
+| `parcels.dimension.unit` |  | 三维的单位, 例如: `CM` |
+| `parcels.dimension.length` |  | 长, 值在: `1 ~ 999.00 CM` |
+| `parcels.dimension.width` |  | 宽, 值在: `1 ~ 999.00 CM` |
+| `parcels.dimension.height` |  | 高, 值在: `1 ~ 999.00 CM` |
+| `parcels.idCardNbr` |  | 身份证号码 |
+
+### 重量
+
+---
+
+| 字段 | 是否必填 | 描述 |
+| ------------- |:-------------:| -----:|
+| `trackingNbr` | **必填** | 运单号, 例如: `13421345644001` |
+| `weight` | **必填** | 重量 |
+| `weight.value` | **必填** | 重量值, 例如: `3032` |
+| `weight.unit` | **必填** | 重量单位, 例如: `G` |
+| `dimension` | **必填** | 三维 |
+| `dimension.length` | **必填** | 长, 例如: `300` |
+| `dimension.width` | **必填** | 宽, 例如: `322` |
+| `dimension.height` | **必填** | 高, 例如: `230` |
+| `dimension.unit` | **必填** | 三维单位, 例如: `CM` |
+
+### 入网清单
+
+---
+
+| 字段 | 是否必填 | 描述 |
+| ------------- |:-------------:| -----:|
+| `trackingNbr` | **必填** | 运单号, 例如: `13421345644001` |
+| `weight` | **必填** | 重量 |
+| `weight.value` | **必填** | 重量值, 例如: `3031` |
+| `weight.unit` | **必填** | 重量单位, 例如: `G` |
+
+### 出库清单
+
+---
+
+#### 创建出库清单 <a id="introduction/请求实体/出库清单/创建出库清单"></a>
+
+| 字段 | 是否必填 | 描述 |
+| ------------- |:-------------:| -----:|
+| `sackNbr` | **必填** | 袋子编号, 例如: `abc12345678` |
+| `parcels` | **必填** | 包裹信息 |
+| `parcels.trackingNbr` | **必填** | 运单号, 例如: `13421345644001` |
+| `parcels.weight` | **必填** | 包裹重量 |
+| `parcels.weight.value` | **必填** | 包裹重量值, 例如: `3031` |
+| `parcels.weight.unit` | **必填** | 包裹重量单位, 例如: `G` |
+
+#### 确认登机 <a id="introduction/请求实体/出库清单/确认登机"></a>
+
+| 字段 | 是否必填 | 描述 |
+| ------------- |:-------------:| -----:|
+| `sackManifestNbr` | **必填** | 出库清单号, 例如: `21392001` |
+| `poa` | **必填** | 目的港, 例如: `LAX` |
+| `pod` | **必填** | 始发港, 例如: `HKG` |
+| `mawbNbr` | **必填** | 航空主提单号, 例如: `123-45678900` |
+| `flightNbr` | **必填** | 航班号, 例如: `f123` |
+| `eta` | **必填** | 预计抵港时间, 例如: `2019-04-24T22:10:33Z` |
+| `etd` | **必填** | 预计离港时间, 例如: `2019-04-23T23:10:33Z` |
+| `boardedOn` | **必填** | 登机时间, 例如: `2019-04-23T22:10:33Z` |
 
 ## Token [/Tokens]
 
@@ -56,6 +172,8 @@ HOST: http://api.olabala.com/
 ## 包裹 [/Parcels]
 
 ### 创建包裹 [POST]
+
+[请求实体](#/introduction/请求实体/包裹)
 
 + Request (application/json)
     + Headers
@@ -81,7 +199,7 @@ HOST: http://api.olabala.com/
                             "unit": "CM"
                         },
                         "consignee": {
-                            "name": "James",
+                            "name": "James Charles",
                             "phone": "123-456-7890",
                             "email": null,
                             "company": null,
@@ -206,14 +324,12 @@ HOST: http://api.olabala.com/
                         "place": "City of Industry, CA",
                         "stage": "Outgated",
                         "operator": "OP-107",
-                        "operation": "CfmFlightOnboarded",
                         "operatedOn": "2019-04-23T09:10:14.355Z"
                     },
                     {
                         "place": "City of Industry, CA",
                         "stage": "Arrived",
                         "operator": "OP-102",
-                        "operation": "CfmFlightArrived",
                         "operatedOn": "2019-04-21T04:10:01.221Z"
                     }
                 ]
@@ -226,6 +342,8 @@ HOST: http://api.olabala.com/
 ## 重量 [/Measures]
 
 ### 更新重量 [PUT]
+
+[请求实体](#/introduction/请求实体/重量)
 
 + Request (application/json)
 
@@ -287,6 +405,8 @@ HOST: http://api.olabala.com/
 
 ### 推送入网 [POST]
 
+[请求实体](#/introduction/请求实体/入网清单)
+
 + Request (application/json)
 
     + Headers
@@ -344,6 +464,8 @@ HOST: http://api.olabala.com/
 ## 出库清单 [/SackManifests]
 
 ### 创建出库清单 [POST]
+
+[请求实体](#/introduction/请求实体/出库清单/创建出库清单)
 
 + Request (application/json)
 
@@ -412,6 +534,8 @@ HOST: http://api.olabala.com/
         }
 
 ### 确认登机 [PUT /SackManifests/Flight/{sackManifestNbr}]
+
+[请求实体](#/introduction/请求实体/出库清单/确认登机)
 
 + Parameters
     + sackManifestNbr (required, string, `763251001`) ... Sack Manifest Number (`sackManifestNbr`)
