@@ -134,12 +134,11 @@ HOST: http://api.olabala.com/
 
 | 字段 | 是否必填 | 描述 |
 | ------------- |:-------------:| -----:|
-| `sackNbr` | **必填** | 袋子编号, 例如: `abc12345678` |
-| `parcels` | **必填** | 包裹信息 |
-| `parcels.trackingNbr` | **必填** | 运单号, 例如: `13421345644001` |
-| `parcels.weight` | **必填** | 包裹重量 |
-| `parcels.weight.value` | **必填** | 包裹重量值, 例如: `3031` |
-| `parcels.weight.unit` | **必填** | 包裹重量单位, 例如: `G` |
+| `sacks` | **必填** | 袋子信息 |
+| `sacks.sackNbr` | **必填** | 袋子编号, 例如: `abc12345678` |
+| `sacks.parcels` | **必填** | 包裹信息 |
+| `sacks.parcels.trackingNbr` | **必填** | 运单号, 例如: `13421345644001` |
+| `outgatedOn` | **必填** | 出库时间, 例如: `2019-04-28T19:04:02.921844+08:00` |
 
 #### 确认登机 <a id="introduction/请求实体/出库清单/确认登机"></a>
 
@@ -239,8 +238,8 @@ HOST: http://api.olabala.com/
                                 "hsCode": "165390"
                             },
                             "lineTotal": {
-                                "value": 15000,
-                                "unit": "CNY"
+                                "value": 400,
+                                "unit": "USD"
                             },
                             "quantity": 1
                             },
@@ -255,8 +254,8 @@ HOST: http://api.olabala.com/
                                 "hsCode": "225311"
                             },
                             "lineTotal": {
-                                "value": 2000,
-                                "unit": "CNY"
+                                "value": 100,
+                                "unit": "USD"
                             },
                             "quantity": 10
                             }
@@ -475,53 +474,36 @@ HOST: http://api.olabala.com/
             Authorization: Bearer <Put Your Token Here>
 
     + Body
-            [
-                {
-                    "sackNbr": "3421001",
-                    "parcels": [
+            {
+                "sacks":[
                     {
-                        "trackingNbr": "129856001",
-                        "weight": {
-                        "value": 400,
-                        "unit": "G"
+                        "sackNbr": "3421001",
+                        "parcels": [
+                        {
+                            "trackingNbr": "129856001"
+                        },
+                        {
+                            "trackingNbr": "129856002"
+                        },
+                        {
+                            "trackingNbr": "129856003"
                         }
+                        ]
                     },
                     {
-                        "trackingNbr": "129856002",
-                        "weight": {
-                        "value": 401,
-                        "unit": "G"
+                        "sackNbr": "3421002",
+                        "parcels": [
+                        {
+                            "trackingNbr": "229856001"
+                        },
+                        {
+                            "trackingNbr": "229856002"
                         }
-                    },
-                    {
-                        "trackingNbr": "129856003",
-                        "weight": {
-                        "value": 402,
-                        "unit": "G"
-                        }
+                        ]
                     }
-                    ]
-                },
-                {
-                    "sackNbr": "3421002",
-                    "parcels": [
-                    {
-                        "trackingNbr": "229856001",
-                        "weight": {
-                        "value": 400,
-                        "unit": "G"
-                        }
-                    },
-                    {
-                        "trackingNbr": "229856002",
-                        "weight": {
-                        "value": 401,
-                        "unit": "G"
-                        }
-                    }
-                    ]
-                }
-            ]
+                ],
+                "outgatedOn": "2019-04-28T19:04:02.921844+08:00"
+            }
 
 + Response 200 (application/json)
 
