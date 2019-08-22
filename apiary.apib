@@ -36,6 +36,9 @@ HOST: https://api.sandbox.onepizza.net/
 6. 机场编码
     > 三字码, 例如: `SHZ`, `HKG`, `SHA`, `JFK`, `LAX`
 
+7. 清关方式
+    > `Regular321`, `Enhanced321`, `Selfclearence`
+
 ### 工作流程
 1. 创建包裹
 2. 创建入网清单(推送入网)
@@ -505,7 +508,8 @@ HOST: https://api.sandbox.onepizza.net/
         + eta: `2019-04-24T22:10:33Z` (string, required) - 预计抵港时间
         + etd: `2019-04-23T23:10:33Z` (string, required) - 预计离港时间
         + boardedOn: `2019-04-23T22:10:33Z` (string, required) - 登机时间
-        
+        + boardedOn: `2019-04-23T22:10:33Z` (string, required) - 登机时间
+        + clrMethod: `Regular321` (string) - 清关方式, 详细请参照上面的清关方式说明
     + Body
     
             {
@@ -515,7 +519,8 @@ HOST: https://api.sandbox.onepizza.net/
                 "flightNbr": "f1231",
                 "eta": "2019-04-25T17:39:49.5865488+08:00",
                 "etd": "2019-04-23T17:39:49.58655+08:00",
-                "boardedOn": "2019-04-22T17:39:49.5865214+08:00"
+                "boardedOn": "2019-04-22T17:39:49.5865214+08:00",
+                "clrMethod": "Regular321"
             }
 
 + Response 200 (application/json)
