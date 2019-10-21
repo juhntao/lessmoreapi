@@ -137,13 +137,13 @@ HOST: https://api.sandbox.onepizza.net/
             Authorization: Bearer <Put Your Token Here>
 
     + Attributes
-        + serviceCode: `CN-US-Express` (string, required) - 服务代码
+        + serviceCode: `` (string, required) - 服务代码, 请向供应商获取
         + parcels (array[parcel], required) - 包裹信息
     
     + Body
 
             {
-                "serviceCode": "CN-US-Express",
+                "serviceCode": "",
                 "parcels": [
                     {
                         "idCardNbr": "322321198912092341",
@@ -242,7 +242,7 @@ HOST: https://api.sandbox.onepizza.net/
             "utcStamp": "2019-04-22T11:36:07.8782103Z"
         }
 
-### 单笔创建(实时获取单号, 特殊情况使用) [POST /Parcels/Single]
+### 单笔创建(实时获取单号, 库内推单专用) [POST /Parcels/Single]
 
 + Request (application/json)
     + Headers
@@ -250,13 +250,13 @@ HOST: https://api.sandbox.onepizza.net/
             Authorization: Bearer <Put Your Token Here>
 
     + Attributes
-        + serviceCode: `CN-US-Express` (string, required) - 服务代码
+        + serviceCode: `` (string, required) - 服务代码, 请向供应商获取
         + parcel (parcel, required) - 包裹信息
     
     + Body
 
             {
-                "serviceCode": "CN-US-Express",
+                "serviceCode": "",
                 "parcel":
                     {
                         "idCardNbr": "322321198912092341",
