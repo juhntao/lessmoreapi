@@ -129,7 +129,7 @@ HOST: https://api.sandbox.onepizza.net/
 
 ## 包裹 [/Parcels]
 
-### 创建包裹 [POST]
+### 批量创建 (异步批量获取面单, 推荐) [POST]
 
 + Request (application/json)
     + Headers
@@ -242,7 +242,7 @@ HOST: https://api.sandbox.onepizza.net/
             "utcStamp": "2019-04-22T11:36:07.8782103Z"
         }
 
-### 单笔创建(实时获取单号, 库内推单专用) [POST /Parcels/Single]
+### 单笔创建 (同步获取面单) [POST /Parcels/Single]
 
 + Request (application/json)
     + Headers
