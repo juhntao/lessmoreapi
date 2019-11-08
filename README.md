@@ -1,3 +1,3 @@
 # onepizza
 
-source for [https://onepizza.docs.apiary.io](https://lessmoretech.docs.apiary.io)
+source for [https://onepizza.docs.apiary.io](https://onepizza.docs.apiary.io)
