@@ -107,6 +107,21 @@ HOST: https://api.sandbox.onepizza.net/
 ## sackParcel
 + trackingNbr: `13421345644001` (string, required) - 运单号
 
+## entry
++ orderNbr: `13421345644001` (string, required) - 订单号
++ shipper (contact, required) - 寄件人信息
++ consignee (contact, required) - 收件人信息
++ weightUnit: `LB` (string, required) - 重量单位
++ dimensionUnit: `CM` (string, required) - 三维单位
++ lineInfos (array[lineInfo], required) - 申报信息
++ measurements (array[measurement], required) - 测量信息
+
+## measurement
++ weight: `22.1` (number, required) - 重量
++ length: `102.1` (number) - 长
++ width: `102.1` (number) - 宽
++ height: `102.1` (number) - 高
+
 ## Token [/Tokens]
 
 ### 获取Token [POST]
@@ -348,6 +363,139 @@ HOST: https://api.sandbox.onepizza.net/
             "message": "",
             "isSuccess": true,
             "utcStamp": "2019-04-22T11:36:07.8782103Z"
+        }
+
+### MTW [POST /Parcels/MTW]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <Put Your Token Here>
+
+    + Attributes
+        + serviceCode: `` (string, required) - 服务代码, 请向供应商获取
+        + entries (entry, required) - 包裹信息
+    
+    + Body
+
+            {
+                "serviceCode": "<Replace me>",
+                "entries": [
+                        {
+                        "orderNbr": "87352121663001",
+                        "shipper": {
+                            "name": "Tao jun",
+                            "phone": "13810221111",
+                            "email": null,
+                            "company": null,
+                            "street1": "RM 101, No. 123 Pingxing Rd",
+                            "street2": null,
+                            "street3": null,
+                            "district": "JingAn District",
+                            "city": "Shanghai",
+                            "province": "Shanghai",
+                            "postalCode": "200040",
+                            "countryCode": "CN"
+                        },
+                        "consignee": {
+                            "name": "James Charles",
+                            "phone": "123-456-7890",
+                            "email": null,
+                            "company": null,
+                            "street1": "12345 Business Oneway",
+                            "street2": null,
+                            "street3": null,
+                            "district": null,
+                            "city": "City Of Industry",
+                            "province": "CA",
+                            "postalCode": "91789",
+                            "countryCode": "US"
+                        },
+                        "weightUnit": "G",
+                        "dimensionUnit": "CM",
+                        "measurements": [
+                            {
+                            "weight": 700,
+                            "length": 50,
+                            "width": 60,
+                            "height": 40
+                            },
+                            {
+                            "weight": 701,
+                            "length": 51,
+                            "width": 61,
+                            "height": 41
+                            }
+                        ],
+                        "lineInfos": null
+                        },
+                        {
+                        "orderNbr": "87352121663002",
+                        "shipper": {
+                            "name": "JAKE",
+                            "phone": "13810221111",
+                            "email": null,
+                            "company": null,
+                            "street1": "RM 101, No. 123 Pingxing Rd",
+                            "street2": null,
+                            "street3": null,
+                            "district": "JingAn District",
+                            "city": "Shanghai",
+                            "province": "Shanghai",
+                            "postalCode": "200040",
+                            "countryCode": "CN"
+                        },
+                        "consignee": {
+                            "name": "James Charles",
+                            "phone": "123-456-7890",
+                            "email": null,
+                            "company": null,
+                            "street1": "12345 Business Oneway",
+                            "street2": null,
+                            "street3": null,
+                            "district": null,
+                            "city": "City Of Industry",
+                            "province": "CA",
+                            "postalCode": "91789",
+                            "countryCode": "US"
+                        },
+                        "weightUnit": "G",
+                        "dimensionUnit": "CM",
+                        "measurements": [
+                            {
+                            "weight": 700,
+                            "length": 50,
+                            "width": 60,
+                            "height": 40
+                            },
+                            {
+                            "weight": 700,
+                            "length": 50,
+                            "width": 60,
+                            "height": 40
+                            }
+                        ],
+                        "lineInfos": null
+                        }
+                ]
+            }
+
++ Response 200 (application/json)
+
+        {
+            "result": [
+                {
+                    "orderNbr": "23443343453",
+                    "trackingNbrs": [
+                        "231233123123"
+                    ],
+                    "errors": [
+                    ]
+                }
+            ],
+            "message": "string",
+            "isSuccess": true,
+            "utcStamp": "2019-11-21T10:01:35.217Z"
         }
 
 ### 获取面单 [GET /Parcels/Label/{trackingNbr}]
