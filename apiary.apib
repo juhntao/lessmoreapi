@@ -56,7 +56,7 @@ HOST: https://api.sandbox.onepizza.net/
 + dimension (dimension) - 三维信息
 + idCardNbr (string) - 身份证号码
 + distInfo (string) - 分拨信息, 此信息会显示到 label 上
-+ pickingInfos (array[string]) - 分拣信息， 最多四条信息， 每条最大17位, 此信息会显示到 label 上
++ pickingInfos (array[string]) - 分拣信息， 最多四条信息， 每条最大17位, 此信息会显示到 offline solution的面单上
 
 ## contact
 + name: `James Charles` (string, required) - 姓名，姓与名之间必须空格
@@ -144,7 +144,7 @@ HOST: https://api.sandbox.onepizza.net/
 
 ## 包裹 [/Parcels]
 
-### 批量创建 (异步获取面单, 推荐) [POST]
+### 批量创建 (异步获取面单, 最适合ERP) [POST]
 
 + Request (application/json)
     + Headers
@@ -257,7 +257,7 @@ HOST: https://api.sandbox.onepizza.net/
             "utcStamp": "2019-04-22T11:36:07.8782103Z"
         }
 
-### 单笔创建 (同步获取面单) [POST /Parcels/Single]
+### 单笔创建 (同步获取面单, 推荐) [POST /Parcels/Single]
 
 + Request (application/json)
     + Headers
